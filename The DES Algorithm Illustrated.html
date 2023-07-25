@@ -80,22 +80,23 @@
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body style="background-color: white;font-family: 'Times New Roman', 'SimSun', 'sans-serif';font-size: 14pt; line-height: 2em">
 
-<h2 style="text-align: center">The DES Algorithm Illustrated</h2>
+<h2 style="text-align: center"> <a href="https://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm">The DES Algorithm Illustrated</a></h2>
 <h3 style="text-align: center"><i> by <a href="https://en.wikipedia.org/wiki/James_Orlin_Grabbe">J. Orlin Grabbe</a>
-    &nbsp; 翻译: <a href="https://github.com/DengWuLi">邓无理</a></i>
+    &nbsp; 翻译: <a href="https://github.com/Chinese-Coding">中文编程</a></i>
 </h3>
 
 <div style="text-align: justify; display: flex;flex-direction: column;justify-items: center;margin-left: 20%;margin-right: 20%">
-    <p>
-        DES (Data Encryption Standard) 算法是世界上使用最为广泛的加密算法. 多年来, 对许多人来说, "secret
-        code making"
-        和 DES 一直算是同义词. 虽然电子前哨基金会 (Electronic Frontier Foundation) 在最近发明了一台价值 22
-        万美元的机器用以破解 DES 加密的信息,
-        但是 DES 将通过一个名为 "triple-DES" 的延寿版使其能够在政府和银行领域继续存在多年.
+    DES (Data Encryption Standard) 算法是世界上使用最为广泛的加密算法. 多年来, 对许多人来说, "secret
+    code making"
+    和 DES 一直算是同义词. 虽然电子前哨基金会 (Electronic Frontier Foundation) 在最近发明了一台价值 22
+    万美元的机器用以破解 DES 加密的信息,
+    但是 DES 将通过一个名为 "triple-DES" 的延寿版使其能够在政府和银行领域继续存在多年.
+    &#96;inline code&#96;
     <p>
         那么, DES 是如何工作的呢? 本文解释了 DNS 加密中涉及的各个步骤, 并通过一个简单的示例说明了每个步骤如何工作.
         自 DES 创建以来, 基于与 DES 类似的设计原则, 出现了许多其他算法 (<a href="#改变数据的方法">改变数据的方法</a>)
@@ -134,10 +135,9 @@
             </a>
             该局在制定标准和协助政府和行业评估技术方面发挥着作用, 并将安排对加密方法进行评估, 以便制定指导方针.
     </blockquote>
-    <p>
-        NBS 一直在等待回应. 直到 1974 年 8 月 6 日, 也就是 Nixon 辞职的前三天, IBM 公司提交了其内部开发的一种名为
-        LUCIFER 算法作为候选者. 在美国国家安全局 (National Security Agency, NSA) 的帮助下对算法进行评估后, NBS 于
-        1977 年 7 月 15 日采用了 LUCIFER 算法的修改版作为新的 Data Encryption Standard (DES).
+    NBS 一直在等待回应. 直到 1974 年 8 月 6 日, 也就是 Nixon 辞职的前三天, IBM 公司提交了其内部开发的一种名为
+    LUCIFER 算法作为候选者. 在美国国家安全局 (National Security Agency, NSA) 的帮助下对算法进行评估后, NBS 于
+    1977 年 7 月 15 日采用了 LUCIFER 算法的修改版作为新的 Data Encryption Standard (DES).
     <p>
         DES 很快被用于非数字媒体, 如音频电话线 (voice-grade public telephone lines). <a href="#举个例子">举个例子</a>,
         在几年内, 美国国际香精香料公司
@@ -150,10 +150,9 @@
 
     <h3 style="text-align: center">DES 的一些初步示例</h3>
 
-    <p>
-        DES 处理位 (bit) 或者说二进制数, 即数字计算机中常见的 0 和 1. 每组四个比特组成一个十六进制数.
-        二进制的 "0001" 等于十六进制数 "1", 二进制 "1000" 等于十六进制数 "8",
-        "1001" 等于十六进制数 "9", "1010" 等于十六进制数 "A"，"1111" 等于十六进制数 "F".
+    DES 处理位 (bit) 或者说二进制数, 即数字计算机中常见的 0 和 1. 每组四个比特组成一个十六进制数.
+    二进制的 "0001" 等于十六进制数 "1", 二进制 "1000" 等于十六进制数 "8",
+    "1001" 等于十六进制数 "9", "1010" 等于十六进制数 "A"，"1111" 等于十六进制数 "F".
     <p>
         DES 对 64 个信息比特组 (相当于 16 个十六进制数) 进行加密. 为了进行加密, DES 使用 "keys", 其长度显然也是 16
         个十六进制数 (64-bits). 但是, 在 DES 算法中, 每个密钥中有 8-bits 会被忽略, 因此密钥的有效长度为 56 位.
@@ -190,16 +189,16 @@
         DES 是一种<b>分块密码 (<i>block cipher</i>)</b>, 这意味着它对给定大小 (64 bits) 的明文块进行操作,
         并返回相同大小的密文块.
         因此, DES 会产生 $2^{64}$ 种可能的 64 位<b>排列 (<i>permutation</i>)</b>, 每个位可能是 0 或 1. 每个 64
-        位块被分为两个各 32 位块----左半块 <b>L</b> 和右半块 <b>R</b>. (这种划分仅在某些操作中使用.)
+        位块被分为两个各 32 位块----左半块 $L$ 和右半块 $R$. (这种划分仅在某些操作中使用.)
     <p>
-        <b>Example:</b> 明文 <b>M</b> = <code>0123456789ABCDEF</code>, 其中 <b>M</b> 为十六进制格式.
+        <b>Example:</b> 明文 $M$ = <code>0123456789ABCDEF</code>, 其中 $M$ 为十六进制格式.
         将其改写为二进制格式，我们得到-64 bits 的文本块:
     <p>
-        <b>M</b> = <code>0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111</code><br>
-        <b>L</b> = <code>0000 0001 0010 0011 0100 0101 0110 0111</code><br>
-        <b>R</b> = <code>1000 1001 1010 1011 1100 1101 1110 1111</code>
+        $M$ = <code>0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111</code><br>
+        $L$ = <code>0000 0001 0010 0011 0100 0101 0110 0111</code><br>
+        $R$ = <code>1000 1001 1010 1011 1100 1101 1110 1111</code>
     <p>
-        从左向右读取: <b>M</b> 的第一位为 0, 最后一位为 1.
+        从左向右读取: $M$ 的第一位为 0, 最后一位为 1.
     <p>
         DES 使用 56-bits 大小的密钥对 64-bits 的数据块进行操作. 密钥实际上被存储为 64-bits, 但是每个密钥中有 8-bits
         没有被使用
@@ -208,18 +207,17 @@
         然而, 在下面的计算中, 我们将左至右对每位依次编号为 1 到 64. 但是, 正如您所看到的, 当我们创建子密钥时, 刚才提到的
         8 位将被删除.
     <p>
-        <b>Example:</b> 十六进制密钥 <b>K</b> = <code>133457799BBCDFF1</code> 这样就得到了二进制密钥 (1 = 0001,
+        <b>Example:</b> 十六进制密钥 $K$ = <code>133457799BBCDFF1</code> 这样就得到了二进制密钥 (1 = 0001,
         3=0011等, 每 8 位位 1 组, 每组的最后一位未使用): <br>
-        <b>K</b> = <code>00010011 00110100 01010111 01111001 10011011 10111100 11011111 11110001</code>
+        $K$ = <code>00010011 00110100 01010111 01111001 10011011 10111100 11011111 11110001</code>
     <p>
         DES 算法有以下几个步骤:
     <h2 style="text-align: center">步骤1: 创建 16 个子密钥, 每个子密钥长度为 48 位</h2>
     <p>
-        64 bits 密钥按照下表 (<b>PC-1</b>) 进行排列. 由于表中的第一个条目是 "57", 这意味着原始密钥 <b>K</b> 的第 57
-        位变成了置换密钥 <b>K+</b>
+        64 bits 密钥按照下表 (<b>PC-1</b>) 进行排列. 由于表中的第一个条目是 "57", 这意味着原始密钥 $K$ 的第 57
+        位变成了置换密钥 $K+$
         的第 1 位. 原始密钥的第 49 位成为置换密钥的第 2 位. 原始密钥的第 4 位成为了置换密钥的最后一位. 请注意, 只有
         56 bits 的原始密钥出现在置换密钥中.
-    <p>
     <table cellspacing="0" style="text-align:right">
         <caption align="top"><b>PC-1</b></caption>
         <tbody>
@@ -309,22 +307,21 @@
     <p>
         <b>Example:</b> 原始的 64-bits 密钥:
     <p>
-        <b>K</b> = <code>00010011 00110100 01010111 01111001 10011011 10111100 11011111 11110001</code>
+        $K$ = <code>00010011 00110100 01010111 01111001 10011011 10111100 11011111 11110001</code>
     <p>
         我们得到 56-bits 的置换密钥:
     <p>
-        <b>K+</b> = <code>1111000 0110011 0010101 0101111 0101010 1011001 1001111 0001111</code>
+        $K+$ = <code>1111000 0110011 0010101 0101111 0101010 1011001 1001111 0001111</code>
     <p>
         然后, 将密钥分成左右两半, 即 $C_0$ 和 $D_0$, 每半有 28-bits.
     <p>
-        <b>Example:</b> 从置换密钥 <b>K+</b> 我们得到:
+        <b>Example:</b> 从置换密钥 $K+$ 我们得到:
     <p>
         $C_0$ = <code>1111000 0110011 0010101 0101111</code>, $D_0$ = <code>0101010 1011001 1001111 0001111</code>
     <p>
         在定义了 $C_0$ 和 $D_0$ 之后, 我们现在构造 16 个 $C_n, D_n, 1 \leq n \leq 16$. 在 $n = 1, 2, ..., 16$ 的情况下,
         每一对 $C_n 和 D_n$ 分别由上一对 $C_{n-1} 和 D_{n-1}$ 使用下面表进行左移操作完成. 左移时, 除第一位外,
         每一位向左移动一位, 第一位则循环到块的末尾.
-    <p>
     <table>
         <tr>
             <th>Iteration</th>
@@ -368,48 +365,31 @@
     <p>
         例如, $C_3 和 D_3$ 分别由 $C_2 和 D_2$ 通过左移两次得到, $C_{16} 和 D_{16}$ 分别由 $C_{15} 和 D_{15}$
         通过左移一次得到.
-        <a href="#循环左移">在所有情况下, 一次左移是指将比特向左旋转一位.</a> 这样, 经过一次左移后, 28
-        bits 比特串上的比特就是之前2, 3, ..., 28,1 位上的比特.
+        <a href="#循环左移">在所有情况下, 一次左移是指将比特向左旋转一位.</a> 这样, 经过一次左移后, 28-bits 块上的比特就是之前2,
+        3, ..., 28,1 位上的比特.
     <p>
         <b>Example:</b> 由原始配对 $C_0$ 和 $D_0$ 可得:
     <p>
-        $C_0$ = <code>1111000011001100101010101111</code>, $D_0$ = <code>0101010101100110011110001111</code>
-    <p>
-        $C_1$ = <code>1110000110011001010101011111</code>, $D_1$ = <code>1010101011001100111100011110</code>
-    <p>
-        $C_2$ = <code>1100001100110010101010111111</code>, $D_2$ = <code>0101010110011001111000111101</code>
-    <p>
-        $C_3$ = <code>0000110011001010101011111111</code>, $D_3$ = <code>0101011001100111100011110101</code>
-    <p>
-        $C_4$ = <code>0011001100101010101111111100</code>, $D_4$ = <code>0101100110011110001111010101</code>
-    <p>
-        $C_5$ = <code>1100110010101010111111110000</code>, $D_5$ = <code>0110011001111000111101010101</code>
-    <p>
-        $C_6$ = <code>0011001010101011111111000011</code>, $D_6$ = <code>1001100111100011110101010101</code>
-    <p>
-        $C_7$ = <code>1100101010101111111100001100</code>, $D_7$ = <code>0110011110001111010101010110</code>
-    <p>
-        $C_8$ = <code>0010101010111111110000110011</code>, $D_8$ = <code>1001111000111101010101011001</code>
-    <p>
-        $C_9$ = <code>0101010101111111100001100110</code>, $D_9$ = <code>0011110001111010101010110011</code>
-    <p>
-        $C_{10}$ = <code>0101010111111110000110011001</code>, $D_{10}$ = <code>1111000111101010101011001100</code>
-    <p>
-        $C_{11}$ = <code>0101011111111000011001100101</code>, $D_{11}$ = <code>1100011110101010101100110011</code>
-    <p>
-        $C_{12}$ = <code>0101111111100001100110010101</code>, $D_{12}$ = <code>0001111010101010110011001111</code>
-    <p>
-        $C_{13}$ = <code>0111111110000110011001010101</code>, $D_{13}$ = <code>0111101010101011001100111100</code>
-    <p>
-        $C_{14}$ = <code>1111111000011001100101010101</code>, $D_{14}$ = <code>1110101010101100110011110001</code>
-    <p>
-        $C_{15}$ = <code>1111100001100110010101010111</code>, $D_{15}$ = <code>1010101010110011001111000111</code>
-    <p>
-        $C_{16}$ = <code>1111000011001100101010101111</code>, $D_{16}$ = <code>0101010101100110011110001111</code>
+        $C_0$ = <code>1111000011001100101010101111</code>, $D_0$ = <code>0101010101100110011110001111</code> <br>
+        $C_1$ = <code>1110000110011001010101011111</code>, $D_1$ = <code>1010101011001100111100011110</code> <br>
+        $C_2$ = <code>1100001100110010101010111111</code>, $D_2$ = <code>0101010110011001111000111101</code> <br>
+        $C_3$ = <code>0000110011001010101011111111</code>, $D_3$ = <code>0101011001100111100011110101</code> <br>
+        $C_4$ = <code>0011001100101010101111111100</code>, $D_4$ = <code>0101100110011110001111010101</code> <br>
+        $C_5$ = <code>1100110010101010111111110000</code>, $D_5$ = <code>0110011001111000111101010101</code> <br>
+        $C_6$ = <code>0011001010101011111111000011</code>, $D_6$ = <code>1001100111100011110101010101</code> <br>
+        $C_7$ = <code>1100101010101111111100001100</code>, $D_7$ = <code>0110011110001111010101010110</code> <br>
+        $C_8$ = <code>0010101010111111110000110011</code>, $D_8$ = <code>1001111000111101010101011001</code> <br>
+        $C_9$ = <code>0101010101111111100001100110</code>, $D_9$ = <code>0011110001111010101010110011</code> <br>
+        $C_{10}$ = <code>0101010111111110000110011001</code>, $D_{10}$ = <code>1111000111101010101011001100</code> <br>
+        $C_{11}$ = <code>0101011111111000011001100101</code>, $D_{11}$ = <code>1100011110101010101100110011</code> <br>
+        $C_{12}$ = <code>0101111111100001100110010101</code>, $D_{12}$ = <code>0001111010101010110011001111</code> <br>
+        $C_{13}$ = <code>0111111110000110011001010101</code>, $D_{13}$ = <code>0111101010101011001100111100</code> <br>
+        $C_{14}$ = <code>1111111000011001100101010101</code>, $D_{14}$ = <code>1110101010101100110011110001</code> <br>
+        $C_{15}$ = <code>1111100001100110010101010111</code>, $D_{15}$ = <code>1010101010110011001111000111</code> <br>
+        $C_{16}$ = <code>1111000011001100101010101111</code>, $D_{16}$ = <code>0101010101100110011110001111</code> <br>
     <p>
         现在, 我们通过对每个<a href="#连接的密钥对">连接的密钥对</a> $C_nD_n$ 应用下面的置换表来形成密钥
         $K_n (1 \leq n \leq 16)$. 每对密钥有 56 位, 但 <b>PC-2</b> 只使用其中的 48 位.
-    <p>
     <table cellspacing="0" style="text-align:right">
         <caption align="top"><b>PC-2</b></caption>
         <tbody>
@@ -517,11 +497,10 @@
         子密钥就介绍到这里. 现在我们来看看信息本身.
     <h2 style="text-align: center">步骤 2: 对每个 64 位数据块进行加密编码</h2>
     <p>
-        对需加密的信息 <b>M</b> 的 64-bits 进行 初始置换 (initial permutation, <b>IP</b>).
-        根据下表重新排列比特位, 表中条目表示比特位在初始顺序基础上的新排列. <b>M</b> 的第 58 位成为 <b>IP</b> 的第 1 位.
-        <b>M</b> 的第 50
-        位成为 <b>IP</b> 的第 2 位. <b>M</b> 的第 7 位是 <b>IP</b> 的最后一位.
-
+        对需加密的信息 $M$ 的 64-bits 进行 初始置换 (initial permutation, <b>IP</b>).
+        根据下表重新排列比特位, 表中条目表示比特位在初始顺序基础上的新排列. $M$ 的第 58 位成为 $IP$ 的第 1 位.
+        $M$ 的第 50
+        位成为 $IP$ 的第 2 位. $M$ 的第 7 位是 $IP$ 的最后一位.
     <table cellspacing="0" style="text-align:right">
         <caption align="top"><b>IP</b></caption>
         <tbody>
@@ -616,17 +595,17 @@
         </tbody>
     </table>
     <p>
-        <b>Example:</b> 将初始置换应用于之前给出的文本块 <b>M</b>, 我们得到:
+        <b>Example:</b> 将初始置换应用于之前给出的文本块 $M$, 我们得到:
     <p>
-        <b>M</b> = <code>0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111 </code><br>
-        <b>IP</b> = <code>1100 1100 0000 0000 1100 1100 1111 1111 1111 0000 1010 1010 1111 0000 1010 1010</code>
+        $M$ = <code>0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111 </code><br>
+        $IP$ = <code>1100 1100 0000 0000 1100 1100 1111 1111 1111 0000 1010 1010 1111 0000 1010 1010</code>
     <p>
-        这里 <b>M</b> 的第 58 位为 "1", 成为 <b>IP</b> 的第 1 位. <b>M</b> 的第 50 位为 "1", 成为 <b>IP</b> 的第 2 位.
-        <b>M</b> 的第 7 位为 "0"，成为 <b>IP</b> 的最后一位.
+        这里 $M$ 的第 58 位为 "1", 成为 $IP$ 的第 1 位. $M$ 的第 50 位为 "1", 成为 $M$ 的第 2 位.
+        $M$ 的第 7 位为 "0"，成为 $IP$ 的最后一位.
     <p>
-        接下来, 将置换块 <b>IP</b> 分成左半部分 $L_0$ (32 bits) 和右半部分 $R_0$ (32 bits).
+        接下来, 将置换块 $IP$ 分成左半部分 $L_0$ (32 bits) 和右半部分 $R_0$ (32 bits).
     <p>
-        <b>Example:</b> 从 <b>IP</b>, 我们得到 $L_0 和 R_0$:
+        <b>Example:</b> 从 $IP$, 我们得到 $L_0 和 R_0$:
     <p>
         $L_0$ = <code>1100 1100 0000 0000 1100 1100 1111 1111</code> <br>
         $R_0$ = <code>1111 0000 1010 1010 1111 0000 1010 1010</code>
@@ -653,8 +632,6 @@
         因此, $E(R_{n-1})$ 需要 32-bits 的输入, 并且输出 48-bits 的块.
     <p>
         $E$ 的 48 位输出 (写成 8 块, 每块 6 bits) 是通过按照下表的顺序选择其输入的位而得到的 :
-    <p>
-
     <table cellspacing="0" style="text-align:right">
         <caption align="top"><a href="#E-Table"><b>E BIT-SELECTION TABLE</b></a></caption>
         <tbody>
@@ -861,15 +838,931 @@
     </table>
     <p>
         设 $S_1$ 是此表中定义的函数, $B$ 是 6-bits 块, 那么 $S_1(B)$ 的确定方法如下: B 的第 1 位和最后一位用来表示二进制下的
-        在十进制 0 - 3 (二进制: 00 - 11) 范围中的一个数字. 令这个数字为 $i$, $B$ 中间的 4 位表示二进制下的
-        在十进制 0 - 3 (二进制: 00 - 11) 范围中的一个数字
+        在十进制 0 - 3 (二进制: 00 - 11) 范围中的一个数字, 令这个数字为 $i$; $B$ 中间的 4 位表示二进制下的
+        在十进制 0 - 15 (二进制: 0000 - 1111) 范围中的一个数字, 令这个数字为 $j$. 在表格中查找第 $i$ 行第 $j$ 列中的数字.
+        它是一个范围在 0 - 15 之间的数字, 唯一表示成一个 4-bits 的数据块. 例如: 对于输入块 $B = 011011$, 第 1 位是 "0",
+        最后一位是
+        "1", 因此选择第 01 行 (即第 1 行). 中间四位是 "1101". 这相当于十进制数 13 的二进制形式, 因此列号为 13. 第 1 行第
+        12 列是 5.
+        这决定了输出; 5 的二进制是 0101, 因此输出是 0101. 所以 $S_1(011011) = 0101$.
+    <p>
+        函数 $S_1, ..., S_8$ 定义如下表所示:
+    <table>
+        <caption align="top">$S_1$</caption>
+        <tbody>
+        <tr>
+            <td>14</td>
+            <td>4</td>
+            <td>13</td>
+            <td>1</td>
+            <td>2</td>
+            <td>15</td>
+            <td>11</td>
+            <td>8</td>
+            <td>3</td>
+            <td>10</td>
+            <td>6</td>
+            <td>12</td>
+            <td>5</td>
+            <td>9</td>
+            <td>0</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>15</td>
+            <td>7</td>
+            <td>4</td>
+            <td>14</td>
+            <td>2</td>
+            <td>13</td>
+            <td>1</td>
+            <td>10</td>
+            <td>6</td>
+            <td>12</td>
+            <td>11</td>
+            <td>9</td>
+            <td>5</td>
+            <td>3</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>1</td>
+            <td>14</td>
+            <td>8</td>
+            <td>13</td>
+            <td>6</td>
+            <td>2</td>
+            <td>11</td>
+            <td>15</td>
+            <td>12</td>
+            <td>9</td>
+            <td>7</td>
+            <td>3</td>
+            <td>10</td>
+            <td>5</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>12</td>
+            <td>8</td>
+            <td>2</td>
+            <td>4</td>
+            <td>9</td>
+            <td>1</td>
+            <td>7</td>
+            <td>5</td>
+            <td>11</td>
+            <td>3</td>
+            <td>14</td>
+            <td>10</td>
+            <td>0</td>
+            <td>6</td>
+            <td>13</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_2$</caption>
+        <tbody>
+        <tr>
+            <td>15</td>
+            <td>1</td>
+            <td>8</td>
+            <td>14</td>
+            <td>6</td>
+            <td>11</td>
+            <td>3</td>
+            <td>4</td>
+            <td>9</td>
+            <td>7</td>
+            <td>2</td>
+            <td>13</td>
+            <td>12</td>
+            <td>0</td>
+            <td>5</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>13</td>
+            <td>4</td>
+            <td>7</td>
+            <td>15</td>
+            <td>2</td>
+            <td>8</td>
+            <td>14</td>
+            <td>12</td>
+            <td>0</td>
+            <td>1</td>
+            <td>10</td>
+            <td>6</td>
+            <td>9</td>
+            <td>11</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>14</td>
+            <td>7</td>
+            <td>11</td>
+            <td>10</td>
+            <td>4</td>
+            <td>13</td>
+            <td>1</td>
+            <td>5</td>
+            <td>8</td>
+            <td>12</td>
+            <td>6</td>
+            <td>9</td>
+            <td>3</td>
+            <td>2</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>8</td>
+            <td>10</td>
+            <td>1</td>
+            <td>3</td>
+            <td>15</td>
+            <td>4</td>
+            <td>2</td>
+            <td>11</td>
+            <td>6</td>
+            <td>7</td>
+            <td>12</td>
+            <td>0</td>
+            <td>5</td>
+            <td>14</td>
+            <td>9</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_3$</caption>
+        <tbody>
+        <tr>
+            <td>10</td>
+            <td>0</td>
+            <td>9</td>
+            <td>14</td>
+            <td>6</td>
+            <td>3</td>
+            <td>15</td>
+            <td>5</td>
+            <td>1</td>
+            <td>13</td>
+            <td>12</td>
+            <td>7</td>
+            <td>11</td>
+            <td>4</td>
+            <td>2</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>7</td>
+            <td>0</td>
+            <td>9</td>
+            <td>3</td>
+            <td>4</td>
+            <td>6</td>
+            <td>10</td>
+            <td>2</td>
+            <td>8</td>
+            <td>5</td>
+            <td>14</td>
+            <td>12</td>
+            <td>11</td>
+            <td>15</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>6</td>
+            <td>4</td>
+            <td>9</td>
+            <td>8</td>
+            <td>15</td>
+            <td>3</td>
+            <td>0</td>
+            <td>11</td>
+            <td>1</td>
+            <td>2</td>
+            <td>12</td>
+            <td>5</td>
+            <td>10</td>
+            <td>14</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>10</td>
+            <td>13</td>
+            <td>0</td>
+            <td>6</td>
+            <td>9</td>
+            <td>8</td>
+            <td>7</td>
+            <td>4</td>
+            <td>15</td>
+            <td>14</td>
+            <td>3</td>
+            <td>11</td>
+            <td>5</td>
+            <td>2</td>
+            <td>12</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_4$</caption>
+        <tbody>
+        <tr>
+            <td>7</td>
+            <td>13</td>
+            <td>14</td>
+            <td>3</td>
+            <td>0</td>
+            <td>6</td>
+            <td>9</td>
+            <td>10</td>
+            <td>1</td>
+            <td>2</td>
+            <td>8</td>
+            <td>5</td>
+            <td>11</td>
+            <td>12</td>
+            <td>4</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>8</td>
+            <td>11</td>
+            <td>5</td>
+            <td>6</td>
+            <td>15</td>
+            <td>0</td>
+            <td>3</td>
+            <td>4</td>
+            <td>7</td>
+            <td>2</td>
+            <td>12</td>
+            <td>1</td>
+            <td>10</td>
+            <td>14</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>6</td>
+            <td>9</td>
+            <td>0</td>
+            <td>12</td>
+            <td>11</td>
+            <td>7</td>
+            <td>13</td>
+            <td>15</td>
+            <td>1</td>
+            <td>3</td>
+            <td>14</td>
+            <td>5</td>
+            <td>2</td>
+            <td>8</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>15</td>
+            <td>0</td>
+            <td>6</td>
+            <td>10</td>
+            <td>1</td>
+            <td>13</td>
+            <td>8</td>
+            <td>9</td>
+            <td>4</td>
+            <td>5</td>
+            <td>11</td>
+            <td>12</td>
+            <td>7</td>
+            <td>2</td>
+            <td>14</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_5$</caption>
+        <tbody>
+        <tr>
+            <td>2</td>
+            <td>12</td>
+            <td>4</td>
+            <td>1</td>
+            <td>7</td>
+            <td>10</td>
+            <td>11</td>
+            <td>6</td>
+            <td>8</td>
+            <td>5</td>
+            <td>3</td>
+            <td>15</td>
+            <td>13</td>
+            <td>0</td>
+            <td>14</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>11</td>
+            <td>2</td>
+            <td>12</td>
+            <td>4</td>
+            <td>7</td>
+            <td>13</td>
+            <td>1</td>
+            <td>5</td>
+            <td>0</td>
+            <td>15</td>
+            <td>10</td>
+            <td>3</td>
+            <td>9</td>
+            <td>8</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>2</td>
+            <td>1</td>
+            <td>11</td>
+            <td>10</td>
+            <td>13</td>
+            <td>7</td>
+            <td>8</td>
+            <td>15</td>
+            <td>9</td>
+            <td>12</td>
+            <td>5</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>8</td>
+            <td>12</td>
+            <td>7</td>
+            <td>1</td>
+            <td>14</td>
+            <td>2</td>
+            <td>13</td>
+            <td>6</td>
+            <td>15</td>
+            <td>0</td>
+            <td>9</td>
+            <td>10</td>
+            <td>4</td>
+            <td>5</td>
+            <td>3</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_6$</caption>
+        <tbody>
+        <tr>
+            <td>12</td>
+            <td>1</td>
+            <td>10</td>
+            <td>15</td>
+            <td>9</td>
+            <td>2</td>
+            <td>6</td>
+            <td>8</td>
+            <td>0</td>
+            <td>13</td>
+            <td>3</td>
+            <td>4</td>
+            <td>14</td>
+            <td>7</td>
+            <td>5</td>
+            <td>11</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>15</td>
+            <td>4</td>
+            <td>2</td>
+            <td>7</td>
+            <td>12</td>
+            <td>9</td>
+            <td>5</td>
+            <td>6</td>
+            <td>1</td>
+            <td>13</td>
+            <td>14</td>
+            <td>0</td>
+            <td>11</td>
+            <td>3</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>14</td>
+            <td>15</td>
+            <td>5</td>
+            <td>2</td>
+            <td>8</td>
+            <td>12</td>
+            <td>3</td>
+            <td>7</td>
+            <td>0</td>
+            <td>4</td>
+            <td>10</td>
+            <td>1</td>
+            <td>13</td>
+            <td>11</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>3</td>
+            <td>2</td>
+            <td>12</td>
+            <td>9</td>
+            <td>5</td>
+            <td>15</td>
+            <td>10</td>
+            <td>11</td>
+            <td>14</td>
+            <td>1</td>
+            <td>7</td>
+            <td>6</td>
+            <td>0</td>
+            <td>8</td>
+            <td>13</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_7$</caption>
+        <tbody>
+        <tr>
+            <td>4</td>
+            <td>11</td>
+            <td>2</td>
+            <td>14</td>
+            <td>15</td>
+            <td>0</td>
+            <td>8</td>
+            <td>13</td>
+            <td>3</td>
+            <td>12</td>
+            <td>9</td>
+            <td>7</td>
+            <td>5</td>
+            <td>10</td>
+            <td>6</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>0</td>
+            <td>11</td>
+            <td>7</td>
+            <td>4</td>
+            <td>9</td>
+            <td>1</td>
+            <td>10</td>
+            <td>14</td>
+            <td>3</td>
+            <td>5</td>
+            <td>12</td>
+            <td>2</td>
+            <td>15</td>
+            <td>8</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>4</td>
+            <td>11</td>
+            <td>13</td>
+            <td>12</td>
+            <td>3</td>
+            <td>7</td>
+            <td>14</td>
+            <td>10</td>
+            <td>15</td>
+            <td>6</td>
+            <td>8</td>
+            <td>0</td>
+            <td>5</td>
+            <td>9</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>11</td>
+            <td>13</td>
+            <td>8</td>
+            <td>1</td>
+            <td>4</td>
+            <td>10</td>
+            <td>7</td>
+            <td>9</td>
+            <td>5</td>
+            <td>0</td>
+            <td>15</td>
+            <td>14</td>
+            <td>2</td>
+            <td>3</td>
+            <td>12</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+    <table>
+        <caption align="top">$S_8$</caption>
+        <tbody>
+        <tr>
+            <td>13</td>
+            <td>2</td>
+            <td>8</td>
+            <td>4</td>
+            <td>6</td>
+            <td>15</td>
+            <td>11</td>
+            <td>1</td>
+            <td>10</td>
+            <td>9</td>
+            <td>3</td>
+            <td>14</td>
+            <td>5</td>
+            <td>0</td>
+            <td>12</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>15</td>
+            <td>13</td>
+            <td>8</td>
+            <td>10</td>
+            <td>3</td>
+            <td>7</td>
+            <td>4</td>
+            <td>12</td>
+            <td>5</td>
+            <td>6</td>
+            <td>11</td>
+            <td>0</td>
+            <td>14</td>
+            <td>9</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>11</td>
+            <td>4</td>
+            <td>1</td>
+            <td>9</td>
+            <td>12</td>
+            <td>14</td>
+            <td>2</td>
+            <td>0</td>
+            <td>6</td>
+            <td>10</td>
+            <td>13</td>
+            <td>15</td>
+            <td>3</td>
+            <td>5</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>14</td>
+            <td>7</td>
+            <td>4</td>
+            <td>10</td>
+            <td>8</td>
+            <td>13</td>
+            <td>15</td>
+            <td>12</td>
+            <td>9</td>
+            <td>0</td>
+            <td>3</td>
+            <td>5</td>
+            <td>6</td>
+            <td>11</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <b>Example:</b> 在第 1 轮中, 我们得到了 8 个 $S$ 箱的输出结果:
+    <p>
+        $K_1 \oplus E(R_0)$ = <code>011000 010001 011110 111010 100001 100110 010100 100111</code> <br>
+        $S_1(B_1)S_2(B_2)S_3(B_3)S_4(B_4)S_5(B_5)S_6(B_6)S_7(B_7)S_8(B_8)$ =
+        <code>0101 1100 1000 0010 1011 0101 1001 0111</code>
+    <p>
+        最后阶段是对 对 S 盒输出进行置换 $P$, 以获得 $f$ 的最终值:
+        $$f = P(S_1(B_1)S_2(B_2)...S_8(B_8))$$
+        置换 $P$ 的定义如下表所示. $P$ 通过对输入块的位进行置换, 实现从 32 位输入产生 32 位输出.
+    <table>
+        <caption align="top">$P$</caption>
+        <tbody>
+        <tr>
+            <td>16</td>
+            <td>7</td>
+            <td>20</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <td>29</td>
+            <td>12</td>
+            <td>28</td>
+            <td>17</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>15</td>
+            <td>23</td>
+            <td>26</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>18</td>
+            <td>31</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>8</td>
+            <td>24</td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <td>32</td>
+            <td>27</td>
+            <td>3</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>13</td>
+            <td>30</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>11</td>
+            <td>4</td>
+            <td>25</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <b>Example:</b> 8 个 $S$ 盒的输出:
+    <p>
+    <div style="text-align: center;">
+        $S_1(B_1)S_2(B_2)S_3(B_3)S_4(B_4)S_5(B_5)S_6(B_6)S_7(B_7)S_8(B_8)$ =
+        <code>0101 1100 1000 0010 1011 0101 1001 0111</code>
+    </div>
+    <p>
+        我们得到:
+    <div style="text-align: center;">
+        $f$ = <code>0010 0011 0100 1010 1010 1001 1011 1011</code>
+    </div>
+    <p>
+        $R_1 = L_0 \oplus f(R_0, K_1)$ = <br>
+        <code>1100 1100 0000 0000 1100 1100 1111 1111</code> $\oplus$
+        <code>0010 0011 0100 1010 1010 1001 1011 1011</code> =
+        <code>1110 1111 0100 1010 0110 0101 0100 0100</code>
+    <p>
+        在下一轮中, 我们将有 $L_2 = R_1$, 也就是我们刚刚计算出的图块, 然后我们必须计算 $R_2 = L_1 \oplus f(R_1, K_2)$,
+        如此循环
+        16 次.
+        第 16 轮结束时, 我们得到了块 $L_{16} 和 R_{16}$. 然后, 我们将这两个区块的顺序颠倒 (<b>reverse</b>)过来,
+        变成 64 位块. $$R_{16}L_{16}$$
+        并对其进行下表定义的最终排列 (final permutation) $IP^{-1}$:
+    <table>
+        <caption align="top">$IP^{-1}$</caption>
+        <tbody>
+        <tr>
+            <td>40</td>
+            <td>8</td>
+            <td>48</td>
+            <td>16</td>
+            <td>56</td>
+            <td>24</td>
+            <td>64</td>
+            <td>32</td>
+        </tr>
+        <tr>
+            <td>39</td>
+            <td>7</td>
+            <td>47</td>
+            <td>15</td>
+            <td>55</td>
+            <td>23</td>
+            <td>63</td>
+            <td>31</td>
+        </tr>
+        <tr>
+            <td>38</td>
+            <td>6</td>
+            <td>46</td>
+            <td>14</td>
+            <td>54</td>
+            <td>22</td>
+            <td>62</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>37</td>
+            <td>5</td>
+            <td>45</td>
+            <td>13</td>
+            <td>53</td>
+            <td>21</td>
+            <td>61</td>
+            <td>29</td>
+        </tr>
+        <tr>
+            <td>36</td>
+            <td>4</td>
+            <td>44</td>
+            <td>12</td>
+            <td>52</td>
+            <td>20</td>
+            <td>60</td>
+            <td>28</td>
+        </tr>
+        <tr>
+            <td>35</td>
+            <td>3</td>
+            <td>43</td>
+            <td>11</td>
+            <td>51</td>
+            <td>19</td>
+            <td>59</td>
+            <td>27</td>
+        </tr>
+        <tr>
+            <td>34</td>
+            <td>2</td>
+            <td>42</td>
+            <td>10</td>
+            <td>50</td>
+            <td>18</td>
+            <td>58</td>
+            <td>26</td>
+        </tr>
+        <tr>
+            <td>33</td>
+            <td>1</td>
+            <td>41</td>
+            <td>9</td>
+            <td>49</td>
+            <td>17</td>
+            <td>57</td>
+            <td>25</td>
+        </tr>
+        </tbody>
+    </table>
+    这意味着算法的输出以预输出 (preoutput) 块的第 40 位作为第 1 位, 第 8 位作为第 2 位, 依此类推, 直到预输出块的第
+    25 位成为输出的最后一位.
+    <p>
+        <b>Example:</b> 如果我们使用前面定义的方法处理所有 16 个区块, 那么在第 16 轮时, 我们会得到:
+    <p>
+        $L_{16}$ = <code>0100 0011 0100 0010 0011 0010 0011 0100</code>
+        $R_{16}$ = <code>0000 1010 0100 1100 1101 1001 1001 0101</code>
+    <p>
+        我们将这两个块的顺序颠倒, 并对其进行最终排列:
+    <p>
+        $R_{16}L_{16}$ = <code>00001010 01001100 11011001 10010101 01000011 01000010 00110010 00110100</code> <br>
+        $IP^{-1}$ = <code>10000101 11101000 00010011 01010100 00001111 00001010 10110100 00000101</code>
+    <p>
+        它的十六进制形式为: <code>85E813540F0AB405</code>
+    <p>
+        这是 $M$ = <code>0123456789ABCDEF</code>的加密形式, 即 $C$ = <code>85E813540F0AB405</code>.
+    <p>
+        解密仅仅是加密的逆过程, 按照上述相同的步骤进行, 但是需要反转应用子密钥的顺序.
 
-
-        以基数 2 表示十进制范围 0 至 3（或二进制 00 至 11）中的一个数字
+    <h2 style="text-align: center;"><b>DES 的运行模式</b></h2>
+    <p>
+        DES 算法将一个 64-bits 消息块 $M$ 转换为一个 64-bits 的密文块 $C$. 如果每个 64-bits 块都单独进行加密, 那么加密的模式称为
+        <b>电子密码本 (Electronic Code Book, ECB)</b>模式. 还有两种其他的 DES 加密模式,
+        分别是<b>链式块编码 (Cipher Block Chaining, CBC) </b>和<b>密文反馈 (Cipher Feedback, CFB)</b>模式,
+        这些模式通过初始的异或运算使得每个密文块依赖于前面所有的消息块.
+    <h3 style="text-align: center;"><b>破解 DES</b></h3>
+    <p>
+        在 DES 成为国家标准之前, 在 NBS 征求对该算法的意见期间, 公钥密码学的创始人 Martin Hellman 和 Whitfield Diffie
+        对使用 DES 作为加密算法提出了一些反对意见. Hellman 写道:
+        "Whit Diffie and I have become concerned that the proposed data encryption standard, while probably secure
+        against commercial assault, may be extremely vulnerable to attack by an intelligence
+        organization"（letter to NBS, October 22, 1975). <span style="color: gray">[这句话的中文翻译: Whit Diffie 和我担心所提议的数据加密标准,
+        虽然可能对商业攻击是安全的, 但可能极易受到情报机构的攻击]</span>
+    <p>
+        Diffie 和 Hellman
+        随后概述了一种对 DES 的 "穷举攻击" (brute force, 即尝试解密密文以得到合理的明文消息之前, 尝试尽可能多的 $2^{56}$
+        个可能的密钥).
+        他们提议建造一台特殊用途的 "并行计算机", 它使用一百万个芯片并且每秒能够尝试一百万个密钥, 这样一台机器成本估计为
+        2000 万美元.
+    <p>
+        快进到 1998 年，根据 EFF 的 John Gilmore 的指导, 一个团队花费了 22 万美元, 并构建了一台能够在平均 4.5 天内遍历整个
+        56-bits 的 DES 密钥空间的计算机.
+        1998 年 7 月 17 日, 他们宣布他们已经在 56 小时内破解了一个 56-bits 的密钥. 这台名为 "Deep Crack"
+        的计算机, 它包含 27 个板, 每个板上有 64 个芯片, 每秒可以测试 900 亿个密钥.
+    <p>
+        尽管如此，<a href="#as recently as June 8, 1998">就在 1998 年 6 月 8 日</a>,
+        司法部主要副助理检察长 (principal associate deputy attorney general at the Department of Justice) Robert Litt
+        否认 FBI 有可能破解 DES: "
+        Let me put the technical problem in context: It took 14,000 Pentium computers working for four months to decrypt
+        a single message . . . . We are not just talking FBI and NSA [needing massive computing power], we are talking
+        about every police department."
+        <span style="color: gray">[这句话的中文翻译: 让我把技术问题放在适当的背景下: 14000 台奔腾计算机工作了四个月才解密了一条消息....
+            我们不仅仅在谈论 FBI 和 NSA [需要大规模计算能力], 我们还在谈论每个警察部门.]</span>
+    <p>
+        密码学专家 Bruce Schneier 回应说:". . . the FBI is either incompetent or lying, or both."
+        <span style="color: gray">[这句话的中文翻译: ...FBI 要么无能, 要么在撒谎, 要么两者都有.]</span>
+        Schneier 继续说：The only solution here is to pick an algorithm with a longer key; there isn't enough silicon in
+        the galaxy or enough time before the sun burns out to brute-force triple-DES" (<i>Crypto-Gram</i>, Counterpane
+        Systems, August 15, 1998).
+        <span style="color: gray">[这句话的中文翻译: 唯一的解决办法是选择一个密钥更长的算法; 在银河系内没有足够的硅片, 也没有足够的时间,
+            在太阳燃烧殆尽之前进行三重 DES 的穷举攻击]</span>
+    <h3 style="text-align: center;"><b>Triple-DES</b></h3>
+    <p>
+        三重 DES (Triple-DES) 实际上是使用两个 56-bits 密钥对 进行三次 DES. 给定一个明文消息, 首先使用第 1 个密钥对消息进行
+        DES 加密.
+        然后使用第 2 个密钥对加密后的消息进行 DES 解密 (由于第 2 个密钥不是正确的密钥, 所以这个解密过程只会进一步混淆数据).
+        接下来, 将经过两次混淆的消息再次使用第 1 个密钥进行加密, 得到最终的密文. 这个三步过程被称为三重 DES.
+    <p>
+        三重 DES 实际上就是按照特定顺序使用两个密钥对 DES 进行三次操作. (也可以使用三个独立的密钥进行三重 DES 操作,
+        无论使用两个还是三个密钥,
+        所得到的密钥空间约为 $2^{112}$.)
+    <div style="line-height: 1em;">
+        <div style="text-align: center;"><b>General Reference</b></div>
+        <p>
+            "Cryptographic Algorithms for Protection of Computer Data
+            During Transmission and Dormant Storage," <i>Federal Register</i>
+            <b>38</b>, No. 93 (May 15, 1973).
+        <p>
+            <i>Data Encryption Standard</i>, Federal Information Processing
+            Standard (FIPS) Publication 46, National Bureau of
+            Standards, U.S. Department of Commerce, Washington D.C.
+            (January 1977).
+        <p>
+            Carl H. Meyer and Stephen M. Matyas, <i>Cryptography: A New
+            Dimension in Computer Data Security</i>, John Wiley & Sons, New
+            York, 1982.
+        <p>
+            Dorthy Elizabeth Robling Denning, <i>Cryptography and Data
+            Security</i>, Addison-Wesley Publishing Company, Reading,
+            Massachusetts, 1982.
+        <p>
+            D.W. Davies and W.L. Price, <i>Security for Computer Networks:
+            An Introduction to Data Security in Teleprocessing and
+            Electronics Funds Transfer</i>, Second Edition, John Wiley &
+            Sons, New York, 1984, 1989.
+        <p>
+            Miles E. Smid and Dennis K. Branstad, "The Data Encryption
+            Standard: Past and Future," in Gustavus J. Simmons, ed.,
+            <i>Contemporary Cryptography: The Science of Information
+                Integrity</i>, IEEE Press, 1992.
+        <p>
+            Douglas R. Stinson, <i>Cryptography: Theory and Practice</i>, CRC
+            Press, Boca Raton, 1995.
+        <p>
+            Bruce Schneier, <i>Applied Cryptography, Second Edition</i>, John
+            Wiley & Sons, New York, 1996.
+        <p>
+            Alfred J. Menezes, Paul C. van Oorschot, and Scott A.
+            Vanstone, <i>Handbook of Applied Cryptography</i>, CRC Press, Boca
+            Raton, 1997.
+        <p>
+            This article appeared in <a href="http://zolatimes.com/">Laissez Faire
+            City Times</a>, Vol 2, No. 28.
+        <p>
+            Homepage: http://orlingrabbe.com/ <br>
+            Laissez Faire City Times: http://zolatimes.com/
+    </div>
 </div>
 
 
-<div style="font-size: 13pt; color: #29627e;margin-left: 20%;margin-right: 20%;margin-top: 2%;text-align: justify; display: flex;flex-direction: column;justify-items: center; line-height: normal">
+<div style="font-size: 13pt; ;margin-left: 20%; margin-right: 20%; margin-top: 2%; line-height: 1em; font-family: 'Times New Roman','sans-serif'">
     <h2 style="text-align: center; color: red"><b>注释: </b></h2>
     <p id="改变数据的方法">
         译者注: "改变数据的方法" 出现的有些让人摸不着头脑, 个人认为, 其表示的是 "其他算法" 可用"改变数据的方法" 代替.
@@ -891,7 +1784,7 @@
         significant value and/or sensitivity.</i>, 这里进行了部分意译, 而非完全按照原文进行的翻译.
     </p>
     <p id="执法机构之间传送的逮捕或逮捕令和定罪记录">
-        译者注: 个人认为 <i>_warrants for arrests_</i> 和 <i>_arrest and conviction records_</i> 虽有重复的地方,
+        译者注: 个人认为 <i>warrants for arrests</i> 和 <i>arrest and conviction records</i> 虽有重复的地方,
         但是表示的含义则有所不同故将两者均保留.
     </p>
     <p id="对航空公司和乘客来说代表投资和价值的机票预订业务">
@@ -947,6 +1840,9 @@
         while "0D" is hexadecimal for Carriage Return, and "0A" is hexadecimal for Line Feed, showing that the message
         file has terminated.</i> 个人认为 <i> "showing that the message file has terminated."</i> 可能存在歧义, 因为它既能说
         "0A" 是一行结束的标志, 也能解释成 "0D0A" 是一行结束的标志. 个人更倾向于后一种解释.
+    </p>
+    <p id="as recently as June 8, 1998">
+        译者注: 这句话的英文原文为 <i>as recently as June 8, 1998</i>
     </p>
 </div>
 </body>
